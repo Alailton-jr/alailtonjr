@@ -1,0 +1,24 @@
+:root {
+  /* Light mode colors - Very light blue theme */
+  --bg: 240 248 255;  /* Alice blue - very light blue */
+  --fg: 15 23 42;
+  --muted: 225 239 254;  /* Light blue tint */
+  --muted-fg: 71 85 105;
+  --accent: 59 130 246;
+  --accent-fg: 255 255 255;
+  --border: 191 219 254;  /* Blue-tinted border */
+  --card: 248 252 255;  /* Very light blue for cards */
+  --card-fg: 15 23 42;
+  
+  /* Transitions */
+  --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode colors removed */
+/* Dark mode media queries removed */
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+  transition: background-color var(--transition), color var(--transition);
+}
