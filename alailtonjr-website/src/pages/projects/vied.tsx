@@ -18,7 +18,6 @@ import {
   Network,
   Lock,
   Cpu,
-  Clock,
   GitBranch,
   GraduationCap,
   Shield,

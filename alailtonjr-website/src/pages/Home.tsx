@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Award, BookOpen, MapPin, GraduationCap, Github, Linkedin, ExternalLink } from 'lucide-react';
+import { ArrowRight, Award, BookOpen, GraduationCap, Github, Linkedin, ExternalLink } from 'lucide-react';
 import { PROFILE } from '../data/site';
 
 // Helper function to get icon for social links
