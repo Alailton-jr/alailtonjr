@@ -21,7 +21,7 @@ export function ProjectDetail() {
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-64 object-cover rounded-xl mb-6"
+          // className="w-full h-64 object-cover rounded-xl mb-6"
         />
       )}
       <p className="text-lg text-muted-fg mb-6">{project.summary}</p>

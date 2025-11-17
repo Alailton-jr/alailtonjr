@@ -22,13 +22,13 @@ export const EDUCATION: Education[] = [
     school: "University of São Paulo",
     degree: "M.S. in Electrical Engineering",
     period: "Jan 2026 (expected)",
-    notes: "Thesis: Enhanced Fault Location Algorithm for Collector Lines of Onshore Wind Power Plants | GPA: 4.0/4.0",
+    notes: "GPA: 4.0/4.0",
   },
   {
     school: "Federal University of Uberlândia",
     degree: "B.S. in Electrical Engineering",
     period: "2018-2023",
-    notes: "GPA: 3.42/4.0",
+    notes: "Grade: 85/100",
   },
 ];
 

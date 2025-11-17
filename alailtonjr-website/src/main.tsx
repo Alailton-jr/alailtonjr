@@ -1,6 +1,7 @@
 import { StrictMode, lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import './index.css';
 import App from './App.tsx';
 
@@ -10,6 +11,7 @@ const Projects = lazy(() => import('./pages/Projects').then(m => ({ default: m.P
 const CV = lazy(() => import('./pages/CV').then(m => ({ default: m.CV })));
 const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
 const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
+const Publications = lazy(() => import('./pages/Publications').then(m => ({ default: m.default })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 const VIED = lazy(() => import('./pages/projects/vied').then(m => ({ default: m.default })));
 const FaultLocator = lazy(() => import('./pages/projects/FaultLocator').then(m => ({ default: m.default })));
@@ -60,6 +62,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: 'publications',
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Publications />
+          </Suspense>
+        ),
+      },
+      {
         path: 'contact',
         element: (
           <Suspense fallback={<LoadingFallback />}>
@@ -97,6 +107,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <HelmetProvider>
+      <RouterProvider router={router} />
+    </HelmetProvider>
   </StrictMode>
 );

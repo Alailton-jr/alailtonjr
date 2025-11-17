@@ -7,12 +7,12 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <a href={project.page || `/projects/${project.id}`} className="group block p-6 rounded-2xl border border-border bg-card hover:shadow-lg transition-all duration-200">
+    <a href={project.page || `/projects/${project.id}`} className="group block p-6 rounded-4xl border border-border bg-card hover:shadow-lg transition-all duration-200">
       {project.image && (
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-48 object-cover rounded-lg mb-4"
+          className="w-full h-48 object-contain rounded-lg mb-4"
           loading="lazy"
         />
       )}

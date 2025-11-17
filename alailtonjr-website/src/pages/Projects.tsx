@@ -1,5 +1,7 @@
 import { useState, useMemo } from 'react';
 import { ProjectCard } from '../components/ProjectCard';
+import windFarmImage from '../assets/wind-farm.svg';
+import vIEDImage from '../assets/vIED-Transition.svg';
 
 // Manually define projects here
 const PROJECTS = [
@@ -9,6 +11,7 @@ const PROJECTS = [
     summary: 'Advanced fault location algorithms for onshore wind farm collector systems with inverter-based resources, combining analytical methods with machine learning.',
     tags: ['Wind Farms', 'IBR', 'Fault Location', 'Machine Learning', 'Protection'],
     page: '/projects/fault-locator',
+    image: windFarmImage,
   },
   {
     id: 'vied',
@@ -17,6 +20,7 @@ const PROJECTS = [
     tags: ['IEC 61850', 'Virtualization', 'C++', 'Linux RT', '87L', 'Centralized PAC'],
     repo: 'https://github.com/yourrepo/vied',
     page: '/projects/vied',
+    image: vIEDImage,
   },
 ];
 
@@ -81,7 +85,7 @@ export function Projects() {
 
       {/* Projects Grid */}
       {filteredProjects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}

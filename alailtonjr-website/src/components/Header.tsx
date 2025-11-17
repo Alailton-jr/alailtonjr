@@ -5,8 +5,8 @@ export function Header() {
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
     { to: '/projects', label: 'Projects' },
+    { to: '/publications', label: 'Publications' },
     { to: '/cv', label: 'CV' },
-    { to: '/contact', label: 'Contact' },
   ];
 
   return (

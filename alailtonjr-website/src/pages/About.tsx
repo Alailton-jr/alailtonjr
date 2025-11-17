@@ -33,7 +33,7 @@ export function About() {
           <p>
             I'm passionate about bridging the gap between traditional power systems
             engineering and modern software development, with experience in building
-            intelligent systems for power grid protection and B2B intelligence platforms.
+            intelligent systems for power grid protection.
           </p>
 
           <p>
