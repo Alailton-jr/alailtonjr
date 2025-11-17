@@ -165,22 +165,22 @@ export const PUBLICATIONS: Publication[] = [
   {
     title: "Development and Performance Evaluation of a Virtualized IED for Digital Substation Applications.",
     authors: "Alves Júnior, A. J.; Oleskovicz, M.; Coury, D. V.",
-    venue: "IEEE Access",
-    year: "2025",
+    venue: "IEEE Open Access Journal of Power and Energy",
+    year: "2026",
     volume: "submitted, under review",
   },
   {
     title: "Data-Driven Reduction of Fault Location Errors in Onshore Wind Farm Collectors.",
     authors: "Alves Júnior, A. J.; Davi, M. J. B. B.; Oleskovicz, M.; Coury, D. V.",
     venue: "Sustainable Energy, Grids and Networks",
-    year: "2025",
+    year: "2026",
     volume: "submitted, under review",
   },
   {
     title: "Analytical Phasor-Based Fault Location Enhancement for Wind Farm Collector Networks.",
-    authors: "Alves Júnior, A. J.; Davi, M. J. B. B.; Coury, D. V.; Oleskovicz, M.",
-    venue: "IEEE Transactions on Power Systems",
-    year: "2025",
+    authors: "Alves Júnior, Barbosa, D.; Fernandes, A. S. R.; Coury, D. V.",
+    venue: "IEEE Transactions on Sustainable Energy",
+    year: "2026",
     volume: "submitted, under review",
   },
 ];

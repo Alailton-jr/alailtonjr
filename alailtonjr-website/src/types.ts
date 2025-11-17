@@ -11,6 +11,7 @@ export type Project = {
   repo?: string;
   link?: string;
   image?: string;
+  page?: string;
 };
 
 export type Experience = {

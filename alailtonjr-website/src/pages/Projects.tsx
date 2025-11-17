@@ -6,13 +6,20 @@ const PROJECTS = [
   {
     id: 'vied',
     title: 'Virtual IED - IEC 61850',
-    summary: 'Open‑source vIED implementing line differential protection with SV/GOOSE, running on virtualized servers.',
-    tags: ['IEC 61850', '87L', 'Virtualization', 'C++', 'Linux RT'],
+    summary: 'Virtualization of Intelligent Electronic Devices (IEDs) for digital substations according to IEC 61850 standards.',
+    tags: ['IEC 61850', 'Virtualization', 'C++', 'Linux RT', '87L', 'Centralized PAC'],
     repo: 'https://github.com/yourrepo/vied',
     page: '/projects/vied',
   },
-  // Add more projects here as needed
+  {
+    id: 'fault-locator',
+    title: 'Enhanced Fault Location for Wind Farm Collectors',
+    summary: 'Advanced fault location algorithms for onshore wind farm collector systems with inverter-based resources, combining analytical methods with machine learning.',
+    tags: ['Wind Farms', 'IBR', 'Fault Location', 'Machine Learning', 'Protection'],
+    page: '/projects/fault-locator',
+  },
 ];
+
 
 export function Projects() {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);

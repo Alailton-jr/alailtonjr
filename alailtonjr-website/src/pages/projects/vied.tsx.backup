@@ -1,0 +1,562 @@
+import React, { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  BookOpen,
+  FileText,
+  GraduationCap,
+  Cpu,
+  Network,
+  Gauge,
+  GitBranch,
+  Cpu as CpuChip,
+  ServerCog,
+  TimerReset,
+  BarChart2,
+  ExternalLink,
+  Menu,
+  X,
+  Layers,
+  CircleHelp,
+} from "lucide-react";
+import { PROJECTS } from "../../data/site";
+
+export const projectMeta = {
+  id: "vied",
+  title: "Virtual IED (87L) for IEC 61850",
+  summary:
+    "Open‑source vIED implementing line differential protection with SV/GOOSE, running on virtualized servers.",
+  tags: ["IEC 61850", "87L", "Virtualization", "C++", "Linux RT"],
+  repo: "https://github.com/yourrepo/vied",
+};
+
+const project = PROJECTS.find((p) => p.id === "vied") ?? projectMeta;
+
+type TopicItem = {
+  id: string;
+  label: string;
+  icon?: React.ReactNode;
+  children?: TopicItem[];
+};
+
+const TOPICS: TopicItem[] = [
+  { id: "intro", label: "Introduction", icon: <BookOpen className="h-4 w-4" /> },
+  { id: "papers", label: "Published Papers", icon: <FileText className="h-4 w-4" /> },
+  {
+    id: "theory",
+    label: "Theoretical Fundamentals",
+    icon: <GraduationCap className="h-4 w-4" />,
+    children: [
+      { id: "virtualization", label: "Virtualization (KVM/SR-IOV)" },
+      { id: "rt-kernel", label: "RT‑Kernel (PREEMPT_RT)" },
+      { id: "virtual-switch", label: "Virtual Switch (Open vSwitch)" },
+      { id: "time-sync", label: "Time Sync (PTP/IEEE‑1588)" },
+      { id: "sogi-fll", label: "Frequency Tracking (SOGI‑FLL)" },
+      { id: "phasor-estimation", label: "Phasor Estimation (Kalman/Cosine)" },
+      { id: "alpha-plane", label: "87L Alpha‑Plane Logic" },
+    ],
+  },
+  {
+    id: "vied-structure",
+    label: "The Virtual IED Structure",
+    icon: <Cpu className="h-4 w-4" />,
+  },
+  { id: "results", label: "Results", icon: <BarChart2 className="h-4 w-4" /> },
+  { id: "references", label: "References", icon: <Layers className="h-4 w-4" /> },
+];
+
+function Tag({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="px-3 py-1 text-xs font-medium rounded-full border border-border bg-muted text-muted-fg">
+      {children}
+    </span>
+  );
+}
+
+function RepoButton({ href }: { href?: string }) {
+  if (!href) return null;
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 text-sm font-medium text-muted-fg hover:text-accent transition-colors"
+    >
+      Repository <ExternalLink className="h-4 w-4" />
+    </a>
+  );
+}
+
+function FigurePlaceholder({
+  title,
+  hint,
+}: {
+  title: string;
+  hint?: string;
+}) {
+  return (
+    <div className="w-full rounded-2xl border border-dashed border-border bg-muted/60 p-6 text-muted-fg">
+      <div className="text-sm font-semibold">Figure Placeholder</div>
+      <div className="mt-1 text-sm">{title}</div>
+      {hint ? <div className="mt-2 text-xs opacity-80">Add figure here: {hint}</div> : null}
+    </div>
+  );
+}
+
+function SectionCard({
+  children,
+  title,
+  icon,
+  subtitle,
+}: {
+  children: React.ReactNode;
+  title: string;
+  icon?: React.ReactNode;
+  subtitle?: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+      <div className="flex items-start gap-3">
+        <div className="mt-1 text-muted-fg">{icon ?? <CircleHelp className="h-4 w-4" />}</div>
+        <div>
+          <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
+          {subtitle ? (
+            <p className="text-sm text-muted-fg mt-1">{subtitle}</p>
+          ) : null}
+        </div>
+      </div>
+      <div className="mt-4 prose prose-sm max-w-none">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function Divider() {
+  return <div className="h-px w-full bg-border my-6" />;
+}
+
+function useActive(initial = TOPICS[0].id) {
+  const [active, setActive] = useState<string>(initial);
+  return { active, setActive } as const;
+}
+
+export default function VIEDProjectPage() {
+  const { active, setActive } = useActive("intro");
+  const [open, setOpen] = useState(false);
+
+  const flatTopicIds = useMemo(() => {
+    const ids: string[] = [];
+    for (const t of TOPICS) {
+      ids.push(t.id);
+      if (t.children) ids.push(...t.children.map((c) => c.id));
+    }
+    return ids;
+  }, []);
+
+  const selected = flatTopicIds.includes(active) ? active : "intro";
+
+  return (
+    <div className="max-w-6xl mx-auto py-8 px-4">
+      <header className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-4xl font-bold mb-2">{project.title}</h1>
+          <p className="text-base text-muted-fg max-w-3xl">{project.summary}</p>
+          <div className="flex flex-wrap gap-2 mt-4">
+            {project.tags?.map((tag: string) => <Tag key={tag}>{tag}</Tag>)}
+          </div>
+          <div className="mt-3">
+            <RepoButton href={project.repo} />
+          </div>
+        </div>
+        <button
+          className="lg:hidden inline-flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-sm text-muted-fg hover:text-accent"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle menu"
+        >
+          {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />} Menu
+        </button>
+      </header>
+
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)] gap-6">
+        {/* Sidebar */}
+        <aside className={`lg:sticky lg:top-8 lg:self-start ${open ? "block" : "hidden lg:block"}`}>
+          <nav className="rounded-2xl border border-border bg-card p-3">
+            <ul className="space-y-1">
+              {TOPICS.map((t) => (
+                <li key={t.id}>
+                  <button
+                    onClick={() => {
+                      setActive(t.id);
+                      setOpen(false);
+                    }}
+                    className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-2 ${
+                      selected === t.id
+                        ? "bg-muted/70 text-foreground"
+                        : "text-muted-fg hover:bg-muted/60"
+                    }`}
+                  >
+                    <span>{t.icon}</span>
+                    <span className="text-sm font-medium">{t.label}</span>
+                  </button>
+                  {t.children ? (
+                    <ul className="mt-1 pl-9 space-y-1">
+                      {t.children.map((c) => (
+                        <li key={c.id}>
+                          <button
+                            onClick={() => {
+                              setActive(c.id);
+                              setOpen(false);
+                            }}
+                            className={`w-full text-left px-3 py-1.5 rounded-md transition-colors text-xs ${
+                              selected === c.id
+                                ? "bg-muted/70 text-foreground"
+                                : "text-muted-fg hover:bg-muted/60"
+                            }`}
+                          >
+                            {c.label}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+
+        {/* Content */}
+        <main>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selected}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="space-y-6"
+            >
+              {selected === "intro" && (
+                <SectionCard title="Introduction" icon={<BookOpen className="h-5 w-5" />}>
+                  <p>
+                    This page presents an academic, navigable overview of the Virtual IED (vIED)
+                    project implementing line differential protection (ANSI 87L) over IEC&nbsp;61850
+                    process/station buses. Use the left sidebar to jump between sections such as
+                    theoretical fundamentals, system architecture, and results.
+                  </p>
+                  <Divider />
+                  <FigurePlaceholder
+                    title="Transition from standalone IEDs to centralized virtualized IEDs on a server"
+                    hint="Insert the high‑level transition diagram"
+                  />
+                </SectionCard>
+              )}
+
+              {selected === "papers" && <PublishedPapers />}
+
+              {selected === "virtualization" && <VirtualizationSection />}
+              {selected === "rt-kernel" && <RTKernelSection />}
+              {selected === "virtual-switch" && <VirtualSwitchSection />}
+              {selected === "time-sync" && <TimeSyncSection />}
+              {selected === "sogi-fll" && <SOGIFLLSection />}
+              {selected === "phasor-estimation" && <PhasorEstimationSection />}
+              {selected === "alpha-plane" && <AlphaPlaneSection />}
+
+              {selected === "vied-structure" && <VIEDStructureSection />}
+              {selected === "results" && <ResultsSection />}
+              {selected === "references" && <ReferencesSection />}
+            </motion.div>
+          </AnimatePresence>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+function PublishedPapers() {
+  return (
+    <SectionCard
+      title="Published Papers"
+      icon={<FileText className="h-5 w-5" />}
+      subtitle="Key manuscripts that ground this project. Replace links and add PDFs as needed."
+    >
+      <ul className="list-disc pl-5 space-y-3">
+        <li>
+          <span className="font-medium">
+            Development and Performance Evaluation of a Virtualized IED for Digital Substation Applications
+          </span>
+          <div className="text-sm text-muted-fg">
+            Open‑source vIED evaluated via real‑time simulations, focusing on response time.
+          </div>
+        </li>
+        <li>
+          <span className="font-medium">
+            Proteção Diferencial de Linhas com IEDs Virtuais em Subestações IEC&nbsp;61850: Implementação e Avaliação
+          </span>
+          <div className="text-sm text-muted-fg">
+            Technical report (Portuguese): 87L implementation and timing analysis with SV/GOOSE.
+          </div>
+        </li>
+        <li>
+          <span className="font-medium">
+            Virtualização de Sistemas de Proteção e Controle em Subestações Digitais: Desenvolvimento e Avaliação de um IED para PAC Centralizada
+          </span>
+          <div className="text-sm text-muted-fg">
+            Conference paper on virtual PAC architectures and IEC&nbsp;61850 latency characterization.
+          </div>
+        </li>
+      </ul>
+
+      <Divider />
+      <FigurePlaceholder
+        title="Gallery of paper figures"
+        hint="Drop miniature thumbnails here if you’d like a quick visual index"
+      />
+    </SectionCard>
+  );
+}
+
+function VirtualizationSection() {
+  return (
+    <SectionCard
+      title="Virtualization (KVM / SR‑IOV)"
+      icon={<ServerCog className="h-5 w-5" />}
+      subtitle="How the vIED runs deterministically on general‑purpose servers."
+    >
+      <p>
+        The vIED executes inside a virtual machine hosted on a Linux/KVM hypervisor. For
+        determinism, dedicate CPU cores (affinity/pinning), isolate interrupts, and prefer
+        direct NIC access (e.g., SR‑IOV/VF) to bypass virtual switching when necessary.
+      </p>
+      <ul className="list-disc pl-5">
+        <li>CPU pinning/NUMA awareness to minimize scheduling jitter.</li>
+        <li>Dedicated queues and hugepages for predictable memory latency.</li>
+        <li>RT‑prio threads for packet I/O, phasor estimation, and protection logic.</li>
+      </ul>
+      <Divider />
+      <FigurePlaceholder
+        title="Server topology and vIED placement"
+        hint="Show host → KVM → VM(vIED) mapping and dedicated CPU/NICs"
+      />
+    </SectionCard>
+  );
+}
+
+function RTKernelSection() {
+  return (
+    <SectionCard
+      title="RT‑Kernel (PREEMPT_RT)"
+      icon={<Gauge className="h-5 w-5" />}
+      subtitle="Reducing latency and jitter for time‑critical protection tasks."
+    >
+      <p>
+        A PREEMPT_RT Linux kernel (e.g., 5.15‑rt) provides bounded scheduling latency for
+        high‑priority threads. Combine interrupt affinity, timer tuning, and I/O scheduler
+        adjustments to meet sub‑cycle response targets.
+      </p>
+      <ul className="list-disc pl-5">
+        <li>Isolate cores for real‑time threads (nohz_full, rcu_nocbs).</li>
+        <li>Prioritize NIC IRQs on isolated cores; cap background services.</li>
+        <li>Use CLOCK_TAI/monotonic sources consistent with PTP time.</li>
+      </ul>
+      <Divider />
+      <FigurePlaceholder
+        title="Latency/jitter histogram under load"
+        hint="Add chart of scheduler latency with/without PREEMPT_RT"
+      />
+    </SectionCard>
+  );
+}
+
+function VirtualSwitchSection() {
+  return (
+    <SectionCard
+      title="Virtual Switch (Open vSwitch)"
+      icon={<Network className="h-5 w-5" />}
+      subtitle="Segregating Process Bus and Station Bus traffic."
+    >
+      <p>
+        Two virtual bridges model the IEC&nbsp;61850 Process Bus (SV/GOOSE) and Station Bus
+        (MMS/monitoring). Define port VLANs and QoS/priority queues so that sampled values
+        and trip GOOSE frames preempt best‑effort flows.
+      </p>
+      <ul className="list-disc pl-5">
+        <li>Map physical NICs 0/1 → Process Bus; NIC 2 → Station Bus.</li>
+        <li>Enable flow rules to prioritize multicast SV and GOOSE VLANs.</li>
+        <li>Consider PRP/HSR at the physical layer for redundancy.</li>
+      </ul>
+      <Divider />
+      <FigurePlaceholder
+        title="OvS bridge diagram (Process vs Station Bus)"
+        hint="Include ports, VLAN tags, QoS queues"
+      />
+    </SectionCard>
+  );
+}
+
+function TimeSyncSection() {
+  return (
+    <SectionCard
+      title="Time Synchronization (PTP/IEEE‑1588)"
+      icon={<TimerReset className="h-5 w-5" />}
+      subtitle="Clock alignment for consistent phasors and event ordering."
+    >
+      <p>
+        The host synchronizes via PTP (IEC/IEEE&nbsp;61850‑9‑3 profile) with hardware timestamping.
+        Guests access a precise host clock (e.g., <code>ptp_kvm</code>) and discipline their time with
+        chrony or ptp4l. This ensures coherent SV sample counters and GOOSE time tags.
+      </p>
+      <ul className="list-disc pl-5">
+        <li>Use HW‑timestamped NICs on the Process Bus.</li>
+        <li>Expose PTP devices to the VM or use KVM paravirtual PTP clock.</li>
+        <li>Audit offset and path asymmetry during fault injections.</li>
+      </ul>
+      <Divider />
+      <FigurePlaceholder
+        title="PTP time flow (Grandmaster → Host → VM)"
+        hint="Show GM, boundary clocks, ptp_kvm device in guest"
+      />
+    </SectionCard>
+  );
+}
+
+function SOGIFLLSection() {
+  return (
+    <SectionCard
+      title="Frequency Tracking (SOGI‑FLL)"
+      icon={<GitBranch className="h-5 w-5" />}
+      subtitle="Robust frequency adaptation for phasor estimation."
+    >
+      <p>
+        A SOGI‑based FLL tracks frequency deviations and clamps the estimate within a safe
+        range (e.g., 40–70&nbsp;Hz). Its output drives the phasor estimator so windows remain
+        phase‑aligned under dynamics.
+      </p>
+      <Divider />
+      <FigurePlaceholder
+        title="SOGI‑FLL block diagram"
+        hint="Insert the control‑loop figure used in the manuscript"
+      />
+    </SectionCard>
+  );
+}
+
+function PhasorEstimationSection() {
+  return (
+    <SectionCard
+      title="Phasor Estimation (Kalman / Cosine Filter)"
+      icon={<CpuChip className="h-5 w-5" />}
+      subtitle="Noise‑robust phasor extraction for protection functions."
+    >
+      <p>
+        The vIED supports a nonlinear Kalman estimator for magnitude/angle tracking and an
+        alternative cosine filter. The estimator consumes SV streams and outputs per‑phase
+        phasors for PIOC, PTOC, PDIS, PDIR, PTOV, and PTUV.
+      </p>
+      <Divider />
+      <FigurePlaceholder
+        title="Nonlinear Kalman filter structure"
+        hint="Add the estimator pipeline diagram"
+      />
+    </SectionCard>
+  );
+}
+
+function AlphaPlaneSection() {
+  return (
+    <SectionCard
+      title="87L Alpha‑Plane Logic"
+      icon={<Shield className="h-5 w-5" />}
+      subtitle="Pickup + vector restraint using local/remote phasors."
+    >
+      <p>
+        The 87L scheme sums local and remote phasors for differential current and applies a
+        vector restraint on the complex ratio <em>k</em> = |I<sub>rem</sub>| / |I<sub>loc</sub>|. Trip occurs when
+        the differential magnitude exceeds a pickup and <em>k</em> lies outside the restraint radius/angle.
+      </p>
+      <Divider />
+      <FigurePlaceholder
+        title="Alpha‑plane with restraint radius and angle"
+        hint="Include the alpha‑plane diagram showing the blocking region"
+      />
+    </SectionCard>
+  );
+}
+
+function VIEDStructureSection() {
+  return (
+    <SectionCard
+      title="The Virtual IED Structure"
+      icon={<Cpu className="h-5 w-5" />}
+      subtitle="Module breakdown and IEC&nbsp;61850 I/O paths."
+    >
+      <p>
+        The software architecture includes: (i) a general‑purpose control module (TCP/MMS & HMI);
+        (ii) a Process Bus interface (SV/GOOSE subscribe→decode, GOOSE publish); (iii) data
+        processing (phasors, logic variables); and (iv) protection modules (50/51/21/67/27/59,
+        plus 87L in this project variant).
+      </p>
+      <ul className="list-disc pl-5">
+        <li>Packet sniffer/decoder with low‑level NIC interface for minimal latency.</li>
+        <li>Phasor outputs and binary inputs feed protection comparators/timers.</li>
+        <li>Trip and block commands are issued via GOOSE publisher.</li>
+      </ul>
+      <Divider />
+      <FigurePlaceholder
+        title="vIED module architecture diagram"
+        hint="Insert the multi‑module block diagram (controller, bus I/F, data processing, protections)"
+      />
+    </SectionCard>
+  );
+}
+
+function ResultsSection() {
+  return (
+    <SectionCard
+      title="Results"
+      icon={<BarChart2 className="h-5 w-5" />}
+      subtitle="Timing performance and protection outcomes."
+    >
+      <p>
+        Summarize operating delay distributions and worst‑case timings for pickup and trip
+        across injected faults (internal/external), resistances, and positions. Add charts for the
+        vIED response compared to baseline expectations.
+      </p>
+      <ul className="list-disc pl-5">
+        <li>Histogram of 87L trip delays (cycles/ms).</li>
+        <li>Box plots by fault resistance and location.</li>
+        <li>GOOSE publish/subscribe latency under load.</li>
+      </ul>
+      <Divider />
+      <FigurePlaceholder
+        title="Distribution of operating delays"
+        hint="Add the delay histogram/box plot here"
+      />
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <FigurePlaceholder title="PSCAD test circuit diagram" hint="Insert test network figure" />
+        <FigurePlaceholder title="Distance/overcurrent zone examples" hint="Insert zone characteristic plots" />
+      </div>
+    </SectionCard>
+  );
+}
+
+function ReferencesSection() {
+  return (
+    <SectionCard
+      title="References"
+      icon={<Layers className="h-5 w-5" />}
+      subtitle="List the complete bibliography used in this project."
+    >
+      <p>
+        Add your numbered bibliography here (IEEE style or similar). Include standards (IEC&nbsp;61850),
+        SOGI‑FLL/Kalman sources, virtual PAC references, and timing studies.
+      </p>
+      <ol className="list-decimal pl-5 space-y-1">
+        <li>IEC&nbsp;61850 parts 5, 8‑1, 9‑2/9‑3 (process bus & station bus).</li>
+        <li>SOGI‑FLL and nonlinear Kalman phasor estimation papers.</li>
+        <li>Virtual PAC and container/VM real‑time evaluations.</li>
+        <li>GOOSE/SV latency and redundancy (PRP/HSR) literature.</li>
+      </ol>
+    </SectionCard>
+  );
+}

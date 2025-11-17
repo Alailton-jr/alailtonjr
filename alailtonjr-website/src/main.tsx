@@ -11,6 +11,8 @@ const CV = lazy(() => import('./pages/CV').then(m => ({ default: m.CV })));
 const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
 const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
+const VIED = lazy(() => import('./pages/projects/vied').then(m => ({ default: m.default })));
+const FaultLocator = lazy(() => import('./pages/projects/FaultLocator').then(m => ({ default: m.default })));
 
 // Loading fallback
 const LoadingFallback = () => (
@@ -62,6 +64,22 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingFallback />}>
             <Contact />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/projects/vied',
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <VIED />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/projects/fault-locator',
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <FaultLocator />
           </Suspense>
         ),
       },
