@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Award, BookOpen, GraduationCap, Github, Linkedin, ExternalLink } from 'lucide-react';
 import { PROFILE } from '../data/site';
+import linesImage from '../assets/lines.jpg';
+import mainImage from '../assets/main.jpg';
 
 // Helper function to get icon for social links
 const getSocialIcon = (label: string) => {
@@ -30,7 +32,7 @@ export function Home() {
           style={{ left: '0%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', maxWidth: '100vw' }}
         >
           <img
-            src="/src/assets/lines.jpg"
+            src={linesImage}
             alt="Wind Farm Background"
             className="w-full h-full object-cover"
             style={{ objectPosition: 'center bottom', height: '100%' }}
@@ -96,7 +98,7 @@ export function Home() {
           <div className="flex justify-center lg:justify-end items-start">
             <div className="w-full max-w-md h-[600px] rounded-2xl overflow-hidden shadow-lg border-4 border-blue-200">
               <img
-                src="/src/assets/main.jpg"
+                src={mainImage}
                 alt="Alailton J. Alves Junior"
                 className="w-full h-full object-cover"
                 style={{ objectPosition: 'top', height: '100%' }}

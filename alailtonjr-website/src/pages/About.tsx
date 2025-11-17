@@ -1,3 +1,5 @@
+import aboutMeImage from '../assets/about-me.jpg';
+
 export function About() {
   return (
     <div className="flex flex-col gap-8 py-12 max-w-3xl mx-auto">
@@ -7,7 +9,7 @@ export function About() {
         <div className="flex-shrink-0 w-full">
           <div className="w-full h-[300px] rounded-2xl overflow-hidden bg-muted flex items-center justify-center">
             <img
-              src="/src/assets/about-me.jpg"
+              src={aboutMeImage}
               alt="Alailton J. Alves Junior"
               className="w-full h-full object-cover"
               style={{ objectPosition: 'center bottom' }}

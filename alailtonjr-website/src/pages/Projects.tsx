@@ -4,19 +4,19 @@ import { ProjectCard } from '../components/ProjectCard';
 // Manually define projects here
 const PROJECTS = [
   {
+    id: 'fault-locator',
+    title: 'Enhanced Fault Location for Wind Farm Collectors',
+    summary: 'Advanced fault location algorithms for onshore wind farm collector systems with inverter-based resources, combining analytical methods with machine learning.',
+    tags: ['Wind Farms', 'IBR', 'Fault Location', 'Machine Learning', 'Protection'],
+    page: '/projects/fault-locator',
+  },
+  {
     id: 'vied',
     title: 'Virtual IED - IEC 61850',
     summary: 'Virtualization of Intelligent Electronic Devices (IEDs) for digital substations according to IEC 61850 standards.',
     tags: ['IEC 61850', 'Virtualization', 'C++', 'Linux RT', '87L', 'Centralized PAC'],
     repo: 'https://github.com/yourrepo/vied',
     page: '/projects/vied',
-  },
-  {
-    id: 'fault-locator',
-    title: 'Enhanced Fault Location for Wind Farm Collectors',
-    summary: 'Advanced fault location algorithms for onshore wind farm collector systems with inverter-based resources, combining analytical methods with machine learning.',
-    tags: ['Wind Farms', 'IBR', 'Fault Location', 'Machine Learning', 'Protection'],
-    page: '/projects/fault-locator',
   },
 ];
 
