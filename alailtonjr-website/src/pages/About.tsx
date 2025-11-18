@@ -27,13 +27,7 @@ export function About() {
           <p>
             My research focuses on fault location in wind farm collector systems with
             inverter-based resources (IBRs) and the development of virtual Intelligent
-            Electronic Devices (IEDs) for line differential protection (87L).
-          </p>
-
-          <p>
-            I'm passionate about bridging the gap between traditional power systems
-            engineering and modern software development, with experience in building
-            intelligent systems for power grid protection.
+            Electronic Devices (IEDs) for digital substations.
           </p>
 
           <p>
