@@ -147,8 +147,32 @@ export const SKILLS = {
 
 export const PUBLICATIONS: Publication[] = [
   {
+    title: "Analytical Phasor-Based Fault Location Enhancement for Wind Farm Collector Networks.",
+    authors: "Alves Junior, A. J.; Barbosa, D.; Fernandes, R. A. S.; Coury, D. V.",
+    venue: "IEEE Transactions on Sustainable Energy",
+    year: "2026",
+    volume: "submitted, under review",
+    link: "https://arxiv.org/abs/2511.21319",
+  },
+  {
+    title: "Data-Driven Reduction of Fault Location Errors in Onshore Wind Farm Collectors.",
+    authors: "Alves Junior, A. J.; Davi, M. J. B. B.; Fernandes, R. A. S.; Oleskovicz, M.; Coury, D. V.",
+    venue: "Sustainable Energy, Grids and Networks",
+    year: "2026",
+    volume: "submitted, under review",
+    link: "https://arxiv.org/abs/2511.21300",
+  },
+  {
+    title: "Design and Performance Assessment of a Virtualized IED for Digital Substations.",
+    authors: "Alves Junior, A. J.; Coury, D. V.; Fernandes, R. A. S.",
+    venue: "IEEE Open Access Journal of Power and Energy",
+    year: "2026",
+    volume: "submitted, under review",
+    link: "https://arxiv.org/abs/2511.21310",
+  },
+  {
     title: "Challenges and recommendations for enhancing protection of onshore wind farm collector systems.",
-    authors: "Alves Júnior, A. J.; Davi, M. J. B. B.; Jorge, D. C.; Barbosa, D.; Oleskovicz, M.; Coury, D. V.",
+    authors: "Alves Junior, A. J.; Davi, M. J. B. B.; Jorge, D. C.; Barbosa, D.; Oleskovicz, M.; Coury, D. V.",
     venue: "Electric Power Systems Research",
     year: "2026",
     volume: "250, 112141",
@@ -156,51 +180,32 @@ export const PUBLICATIONS: Publication[] = [
   },
   {
     title: "An Improved Methodology to Locate Faults in Onshore Wind Farm Collector Systems.",
-    authors: "Davi, M.; Alves Júnior, A.; Grilo, C.; Cunha, T.; Lessa, L.; Oleskovicz, M.; Coury, D.",
+    authors: "Davi, M.; Alves Junior, A.; Grilo, C.; Cunha, T.; Lessa, L.; Oleskovicz, M.; Coury, D.",
     venue: "Energies",
     year: "2025",
     volume: "18, 693",
     link: "https://doi.org/10.3390/en18030693",
-  },
-  {
-    title: "Development and Performance Evaluation of a Virtualized IED for Digital Substation Applications.",
-    authors: "Alves Júnior, A. J.; Oleskovicz, M.; Coury, D. V.",
-    venue: "IEEE Open Access Journal of Power and Energy",
-    year: "2026",
-    volume: "submitted, under review",
-  },
-  {
-    title: "Data-Driven Reduction of Fault Location Errors in Onshore Wind Farm Collectors.",
-    authors: "Alves Júnior, A. J.; Davi, M. J. B. B.; Oleskovicz, M.; Coury, D. V.",
-    venue: "Sustainable Energy, Grids and Networks",
-    year: "2026",
-    volume: "submitted, under review",
-  },
-  {
-    title: "Analytical Phasor-Based Fault Location Enhancement for Wind Farm Collector Networks.",
-    authors: "Alves Júnior, Barbosa, D.; Fernandes, A. S. R.; Coury, D. V.",
-    venue: "IEEE Transactions on Sustainable Energy",
-    year: "2026",
-    volume: "submitted, under review",
   },
 ];
 
 export const PROCEEDINGS: Publication[] = [
   {
     title: "Differential Line Protection with Virtual IEDs in IEC 61850 Substations: Implementation and Evaluation.",
-    authors: "Alves Júnior, A. J.; Coury, D. V.; Barbosa, D.; Fernandes, R. A. S.",
+    authors: "Alves Junior, A. J.; Coury, D. V.; Barbosa, D.; Fernandes, R. A. S.",
     venue: "XXVIII National Seminar on Generation and Transmission of Electric Energy",
     year: "2025",
+    link: "https://drive.google.com/file/d/1nk85HSdGyIk3nuOGnNcgQwEcXzZwIFx9/view?usp=share_link",
   },
   {
     title: "Virtualization of Protection and Control in Digital Substations: Development and Evaluation of an IED for Centralized PAC Architectures.",
-    authors: "Alves Júnior, A. J.; Coury, D. V.; Fernandes, R. A. S.; Petrônio, A. P.",
+    authors: "Alves Junior, A. J.; Coury, D. V.; Fernandes, R. A. S.; Petrônio, A. P.",
     venue: "XVII Technical Seminar on Protection and Control (STPC)",
     year: "2024",
+    link: "https://drive.google.com/file/d/15LPN2itiAK6qmauxnLrCV9u1uYBSpGPa/view?usp=share_link",
   },
   {
     title: "Virtual Test Tool for Centralized Protection & Control Systems — IEC 61850.",
-    authors: "Alves Júnior, A. J.; Pinheiro, A. P.; Moura, F. A. M.; Duarte, L. J.; Bernardes, G. M.; Melo, D. B.; Souza Júnior, F. R.; Domingos, A. C.; Santos, R. S.",
+    authors: "Alves Junior, A. J.; Pinheiro, A. P.; Moura, F. A. M.; Duarte, L. J.; Bernardes, G. M.; Melo, D. B.; Souza Junior, F. R.; Domingos, A. C.; Santos, R. S.",
     venue: "XXII Conference on Studies in Electrical Engineering",
     year: "2023",
     volume: "vol. 22",
@@ -208,7 +213,7 @@ export const PROCEEDINGS: Publication[] = [
   },
   {
     title: "Binarization Algorithm for QR Code Images under Nonuniform Illumination.",
-    authors: "Alves Júnior, A. J.; Medeiros, L. X.; Mateus, A. C.; Costa, A. L. A.",
+    authors: "Alves Junior, A. J.; Medeiros, L. X.; Mateus, A. C.; Costa, A. L. A.",
     venue: "Conference on Studies in Electrical Engineering",
     year: "2022",
     link: "https://www.peteletricaufu.com.br/static/ceel/artigos/artigo_705.pdf",
@@ -225,7 +230,7 @@ export const PROCEEDINGS: Publication[] = [
 export const THESES: Publication[] = [
   {
     title: "Enhanced Fault Location Algorithm for Collector Lines of Onshore Wind Power Plants.",
-    authors: "Alves Júnior, A. J.",
+    authors: "Alves Junior, A. J.",
     venue: "Master's Dissertation, University of São Paulo",
     year: "2025",
   },
